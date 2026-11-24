@@ -1,0 +1,111 @@
+Python: 3.11.18 (main, Nov 11 2026, 00:16:37) [Clang 23.1.3 ]
+CUDA available: True
+GPU 0,1: NVIDIA H20-3e
+GPU 0,1 Compute Capability: 9.0
+CUDA_HOME: /home/hadoop-scale-llm/dasc/tokenspeed_learning/.tools/cuda-12.9
+NVCC: Cuda compilation tools, release 12.9, V12.9.86
+CUDA Driver Version: 550.127.08
+PyTorch: 2.14.0+cu126
+tokenspeed: 0.1.1
+aiohttp: 3.14.5
+apache-tvm-ffi: 0.1.13.post3
+compressed-tensors: 0.20.1
+dill: 0.4.1
+einops: 0.8.2
+fastapi: 0.165.0
+flashinfer-cubin: 0.7.5
+flashinfer-python: 0.7.5
+hf_transfer: 0.1.9
+huggingface_hub: 1.33.0
+instanttensor: Package Not Found
+modelscope: 1.40.3
+msgspec: 0.22.0
+ninja: 1.13.2
+numpy: 2.4.6
+nvidia-cutlass-dsl: 4.8.0
+nvidia-cutlass-dsl-libs-cu13: 4.8.0
+nvidia-ml-py: 13.580.82
+nvtx: 0.2.17
+openai: 3.57.0
+openai-harmony: 0.0.8
+orjson: 3.13.0
+packaging: 26.3
+partial-json-parser: 0.2.1.1.post7
+peft: 0.22.0
+pillow: 13.0.0
+prometheus-client: 0.26.0
+psutil: 7.2.2
+pybind11: 3.1.0
+pydantic: 2.14.4
+py-spy: 0.4.4
+PyYAML: 6.0.4
+pytest-asyncio: 1.5.0
+python-multipart: 0.0.34
+pyzmq: 27.3.0
+requests: 2.34.2
+setproctitle: 1.3.8
+tiktoken: 0.14.0
+tokenspeed-deepep: 2.1.0.post20260810
+tokenspeed-deepgemm: 2.8.2.post20261115
+tokenspeed-fa3: 3.0.0.post20260810
+tokenspeed-fa4: 4.0.0.post20260923
+tokenspeed-fast-hadamard-transform: 1.1.0.post20260920
+tokenspeed-flashmla: 1.0.0.post20260924
+tokenspeed-iris: Package Not Found
+tokenspeed-kernel: 0.1.5.dev20261123+git8289d0f4
+tokenspeed-kernel-amd: Package Not Found
+tokenspeed-kernel-npu: Package Not Found
+tokenspeed-mla: 2.0.12
+tokenspeed-mooncake: 0.3.13.post20261119
+tokenspeed-proton: 3.9.10.post20261028
+tokenspeed-quack: 0.6.4.post20260923
+tokenspeed-scheduler: Package Not Found
+tokenspeed-smg: 1.16.0.post20261121
+tokenspeed-triton: 3.9.10.post20261028
+torch: 2.14.0+cu126
+torch-npu: Package Not Found
+torch_memory_saver: 0.0.10
+torchvision: 0.29.0+cu126
+tqdm: 4.70.1
+transformers: 5.12.0
+triton-ascend: Package Not Found
+uv: 0.13.9
+uvicorn: 0.54.0
+viztracer: 1.1.1
+xgrammar: 0.2.8
+NVIDIA Topology: 
+	[4mGPU0	GPU1	NIC0	NIC1	NIC2	NIC3	NIC4	NIC5	NIC6	NIC7	CPU Affinity	NUMA Affinity	GPU NUMA ID[0m
+GPU0	 X 	NV18	SYS	SYS	SYS	SYS	NODE	NODE	NODE	NODE				N/A
+GPU1	NV18	 X 	SYS	SYS	SYS	SYS	NODE	NODE	NODE	NODE				N/A
+NIC0	SYS	SYS	 X 	PIX	NODE	NODE	SYS	SYS	SYS	SYS				
+NIC1	SYS	SYS	PIX	 X 	NODE	NODE	SYS	SYS	SYS	SYS				
+NIC2	SYS	SYS	NODE	NODE	 X 	PIX	SYS	SYS	SYS	SYS				
+NIC3	SYS	SYS	NODE	NODE	PIX	 X 	SYS	SYS	SYS	SYS				
+NIC4	NODE	NODE	SYS	SYS	SYS	SYS	 X 	PIX	NODE	NODE				
+NIC5	NODE	NODE	SYS	SYS	SYS	SYS	PIX	 X 	NODE	NODE				
+NIC6	NODE	NODE	SYS	SYS	SYS	SYS	NODE	NODE	 X 	PIX				
+NIC7	NODE	NODE	SYS	SYS	SYS	SYS	NODE	NODE	PIX	 X 				
+
+Legend:
+
+  X    = Self
+  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)
+  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node
+  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)
+  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)
+  PIX  = Connection traversing at most a single PCIe bridge
+  NV#  = Connection traversing a bonded set of # NVLinks
+
+NIC Legend:
+
+  NIC0: mlx5_0
+  NIC1: mlx5_1
+  NIC2: mlx5_2
+  NIC3: mlx5_3
+  NIC4: mlx5_4
+  NIC5: mlx5_5
+  NIC6: mlx5_6
+  NIC7: mlx5_7
+
+
+ulimit soft: 1048576

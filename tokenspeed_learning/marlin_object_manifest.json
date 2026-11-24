@@ -1,0 +1,7 @@
+{
+  "source": "/home/hadoop-scale-llm/dasc/tokenspeed/tokenspeed-kernel/python/tokenspeed_kernel/thirdparty/cuda/csrc/marlin_moe/marlin_moe_binding.cu",
+  "object": "/home/hadoop-scale-llm/dasc/tokenspeed/tokenspeed-kernel/python/tokenspeed_kernel/thirdparty/cuda/objs/marlin_moe/marlin_moe_binding.o",
+  "source_sha256": "fdaee013ec60cae345c649c64fa8619ace06fb7351fb88576aa852ae654fc9f7",
+  "object_sha256": "14796eac99357d2410be5e350577a1d2f93cb18bdbf68feb1c416d7e4eb27d3c",
+  "reason": "Same checkout, compiler 12.9.86, sm90a flags; cuBLAS and cuRAND headers are not used by Marlin."
+}

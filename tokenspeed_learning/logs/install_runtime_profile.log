@@ -1,0 +1,5 @@
+Using Python 3.11.18 environment at: .venv-cu129
+error: No solution found when resolving dependencies
+  cause: Because cuda-toolkit[cudart]==12.6.3 depends on nvidia-cuda-runtime-cu12{sys_platform == 'linux' or sys_platform == 'win32'}==12.6.77.* and tokenspeed-mooncake>=0.3.13.post20261119 depends on nvidia-cuda-runtime-cu12>=12.9,<13, we can conclude that tokenspeed-mooncake>=0.3.13.post20261119 and cuda-toolkit[cudart]==12.6.3 are incompatible.
+         And because torch==2.14.0+cu126 depends on cuda-toolkit[cudart]==12.6.3, we can conclude that tokenspeed-mooncake>=0.3.13.post20261119 and torch==2.14.0+cu126 are incompatible.
+         And because you require torch==2.14.0+cu126 and tokenspeed-mooncake==0.3.13.post20261119, we can conclude that your requirements are unsatisfiable.

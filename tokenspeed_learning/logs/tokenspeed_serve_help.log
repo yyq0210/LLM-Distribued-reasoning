@@ -1,0 +1,13 @@
+usage: tokenspeed serve [-h] [--headless]
+
+Launch the TokenSpeed inference server: the full serving stack by default (an
+smg gateway fronting the engine over smg's direct ZMQ lane), or the engine
+alone with --headless.
+
+options:
+  -h, --help  show this help message and exit
+  --headless  Run the engine only, without a frontend. An external frontend —
+              e.g. `smg serve --backend tokenspeed --connection-mode zmq` or
+              Dynamo — binds the msgpack ZMQ sockets and this engine dials in
+              at --data-parallel-address/--data-parallel-rpc-port (default
+              tcp://127.0.0.1:30500).

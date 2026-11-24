@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1330" viewBox="0 0 1600 1330">
+<title>两条 EP 路径：广播全部 token，或只发送被选中的 token</title>
+<rect width="1600" height="1330" fill="#F5F7FB"/>
+<text x="50" y="54" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="42" fill="#14243A">两条 EP 路径：广播全部 token，或只发送被选中的 token</text>
+<text x="50" y="110" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#52627B">相同起点：每卡拥有 4 个不重复 token，X=[4,4096]；全局共 16 个 token</text>
+<rect x="50" y="150" width="725" height="1010" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="412.5" y="191" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">AllGather → 本地专家 → ReduceScatter</text>
+<rect x="825" y="150" width="725" height="1010" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="1187.5" y="191" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#7654C4">Top-2 → AllToAll → 专家 → 返回</text>
+<rect x="75" y="240" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="412" y="280" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">每卡 X=[4,4096]</text>
+<line x1="412" y1="327" x2="412" y2="360" stroke="#2563EB" stroke-width="3"/>
+<polygon points="412,360 418.0,347.0 406.0,347.0" fill="#2563EB"/>
+<rect x="850" y="240" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1187" y="280" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">每卡 X=[4,4096]</text>
+<line x1="1187" y1="327" x2="1187" y2="360" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1187,360 1193.0,347.0 1181.0,347.0" fill="#7654C4"/>
+<rect x="75" y="370" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="412" y="410" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">EP4 AllGather → X=[16,4096]</text>
+<line x1="412" y1="457" x2="412" y2="490" stroke="#2563EB" stroke-width="3"/>
+<polygon points="412,490 418.0,477.0 406.0,477.0" fill="#2563EB"/>
+<rect x="850" y="370" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1187" y="410" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">Router [4,8] → Top-2 ids/weights [4,2]</text>
+<line x1="1187" y1="457" x2="1187" y2="490" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1187,490 1193.0,477.0 1181.0,477.0" fill="#7654C4"/>
+<rect x="75" y="500" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="412" y="540" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">本地路由筛选 → 本卡专家共 8 行</text>
+<line x1="412" y1="587" x2="412" y2="620" stroke="#2563EB" stroke-width="3"/>
+<polygon points="412,620 418.0,607.0 406.0,607.0" fill="#2563EB"/>
+<rect x="850" y="500" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1187" y="540" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">Dispatch → 每卡收到 8 条专家任务</text>
+<line x1="1187" y1="587" x2="1187" y2="620" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1187,620 1193.0,607.0 1181.0,607.0" fill="#7654C4"/>
+<rect x="75" y="630" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="412" y="670" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">2 个本地专家：各处理 [4,4096]</text>
+<line x1="412" y1="717" x2="412" y2="750" stroke="#2563EB" stroke-width="3"/>
+<polygon points="412,750 418.0,737.0 406.0,737.0" fill="#2563EB"/>
+<rect x="850" y="630" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1187" y="670" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">2 个本地专家：各处理 [4,4096]</text>
+<line x1="1187" y1="717" x2="1187" y2="750" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1187,750 1193.0,737.0 1181.0,737.0" fill="#7654C4"/>
+<rect x="75" y="760" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="412" y="800" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">按原 token 位置写回 P_r=[16,4096]</text>
+<line x1="412" y1="847" x2="412" y2="880" stroke="#2563EB" stroke-width="3"/>
+<polygon points="412,880 418.0,867.0 406.0,867.0" fill="#2563EB"/>
+<rect x="850" y="760" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1187" y="800" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">专家输出 [8,4096] → 返回原 owner</text>
+<line x1="1187" y1="847" x2="1187" y2="880" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1187,880 1193.0,867.0 1181.0,867.0" fill="#7654C4"/>
+<rect x="75" y="890" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="412" y="930" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">EP4 ReduceScatter → Y_r=[4,4096]</text>
+<rect x="850" y="890" width="675" height="80" rx="16" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1187" y="930" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">按 Top-2 权重合并 → Y_r=[4,4096]</text>
+<text x="412" y="1052" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#52627B">部分和按 token 对齐；缺失贡献填零。</text>
+<text x="1187" y="1052" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#52627B">发送完整 H 维向量；按专家目的地分包。</text>
+<text x="412" y="1110" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#2563EB">每卡发送：192 KiB / dispatch + combine</text>
+<text x="1187" y="1110" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#7654C4">每卡发送：96 KiB / dispatch + combine</text>
+<text x="50" y="1210" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#52627B">通信量仅计 BF16 激活发送：均衡示例、无 padding/元数据；不含 attention 和共享分支。</text>
+<text x="50" y="1255" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">AllToAll 不是单个 API 的替换：还需要打包、目标计数、反向回传、恢复 token 顺序和加权合并。</text>
+<text x="50" y="1300" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">图中的每专家 4 行是人为构造的均衡路由，真实推理中行数随输入变化。</text>
+</svg>

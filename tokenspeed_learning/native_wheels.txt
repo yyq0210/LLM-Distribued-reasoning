@@ -1,0 +1,8 @@
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_deepep-2.1.0.post20260810-cp311-cp311-manylinux_2_28_x86_64.whl
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_deepgemm-2.8.2.post20261115-cp311-cp311-manylinux_2_28_x86_64.whl
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_engine-0.1.1.post20261123-cp311-cp311-manylinux_2_28_x86_64.whl
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_fa3-3.0.0.post20260810-cp39-abi3-manylinux_2_28_x86_64.whl
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_fast_hadamard_transform-1.1.0.post20260920-cp311-cp311-manylinux_2_28_x86_64.whl
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_flashkda-0.0.1.post20260901-cp311-cp311-manylinux_2_28_x86_64.whl
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_flashmla-1.0.0.post20260924-cp311-cp311-manylinux_2_28_x86_64.whl
+/home/hadoop-scale-llm/dasc/tokenspeed_learning/downloads/tokenspeed_mooncake-0.3.13.post20261119-cp311-cp311-manylinux_2_28_x86_64.whl

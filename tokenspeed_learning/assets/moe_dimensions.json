@@ -1,0 +1,216 @@
+{
+  "scope": "CPU arithmetic only; no GPU or network execution",
+  "config": {
+    "world_size": 4,
+    "hidden": 4096,
+    "tokens": 16,
+    "experts": 8,
+    "topk": 2,
+    "item_bytes": 2
+  },
+  "rank_owned_rows": 4,
+  "dispatch_source_destination_assignments": [
+    [
+      2,
+      2,
+      2,
+      2
+    ],
+    [
+      2,
+      2,
+      2,
+      2
+    ],
+    [
+      2,
+      2,
+      2,
+      2
+    ],
+    [
+      2,
+      2,
+      2,
+      2
+    ]
+  ],
+  "expert_rows": [
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4,
+    4
+  ],
+  "remote_rows_sent_per_rank": [
+    6,
+    6,
+    6,
+    6
+  ],
+  "ep_send_kib_per_rank": {
+    "allgather": 96,
+    "reduce_scatter": 96,
+    "allgather_plus_reduce_scatter": 192,
+    "alltoall_dispatch": 48,
+    "alltoall_return": 48,
+    "alltoall_dispatch_plus_return": 96
+  },
+  "assumptions": [
+    "Send bytes only; do not add receive bytes to the table",
+    "Ring-equivalent AllGather/ReduceScatter, balanced toy routing",
+    "No padding, metadata, protocol, quantization, or multi-hop accounting",
+    "EP routed branch only; excludes attention/shared-expert communication"
+  ],
+  "routes": [
+    {
+      "token": 0,
+      "source": 0,
+      "experts": [
+        0,
+        3
+      ]
+    },
+    {
+      "token": 1,
+      "source": 0,
+      "experts": [
+        3,
+        4
+      ]
+    },
+    {
+      "token": 2,
+      "source": 0,
+      "experts": [
+        4,
+        7
+      ]
+    },
+    {
+      "token": 3,
+      "source": 0,
+      "experts": [
+        7,
+        0
+      ]
+    },
+    {
+      "token": 4,
+      "source": 1,
+      "experts": [
+        2,
+        5
+      ]
+    },
+    {
+      "token": 5,
+      "source": 1,
+      "experts": [
+        5,
+        6
+      ]
+    },
+    {
+      "token": 6,
+      "source": 1,
+      "experts": [
+        6,
+        1
+      ]
+    },
+    {
+      "token": 7,
+      "source": 1,
+      "experts": [
+        1,
+        2
+      ]
+    },
+    {
+      "token": 8,
+      "source": 2,
+      "experts": [
+        4,
+        7
+      ]
+    },
+    {
+      "token": 9,
+      "source": 2,
+      "experts": [
+        7,
+        0
+      ]
+    },
+    {
+      "token": 10,
+      "source": 2,
+      "experts": [
+        0,
+        3
+      ]
+    },
+    {
+      "token": 11,
+      "source": 2,
+      "experts": [
+        3,
+        4
+      ]
+    },
+    {
+      "token": 12,
+      "source": 3,
+      "experts": [
+        6,
+        1
+      ]
+    },
+    {
+      "token": 13,
+      "source": 3,
+      "experts": [
+        1,
+        2
+      ]
+    },
+    {
+      "token": 14,
+      "source": 3,
+      "experts": [
+        2,
+        5
+      ]
+    },
+    {
+      "token": 15,
+      "source": 3,
+      "experts": [
+        5,
+        6
+      ]
+    }
+  ],
+  "scalar_routed_output": [
+    9,
+    28,
+    63,
+    40,
+    75,
+    120,
+    77,
+    64,
+    189,
+    100,
+    99,
+    168,
+    143,
+    112,
+    225,
+    320
+  ]
+}

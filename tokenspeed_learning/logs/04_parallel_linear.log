@@ -1,0 +1,23 @@
+/home/hadoop-scale-llm/dasc/tokenspeed/.venv-cu129/lib/python3.11/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+/home/hadoop-scale-llm/dasc/tokenspeed/.venv-cu129/lib/python3.11/site-packages/torch/distributed/c10d_logger.py:83: FutureWarning: `torch.distributed.all_gather_into_tensor` is deprecated. Please use `torch.distributed.all_gather_single` instead.
+  return func(*args, **kwargs)
+rank=0
+  input X: [[1.0, 2.0, 3.0, 4.0]]
+  column weight [out_local, in]: [3, 4]
+  column gather_output=False: [[1.0, 2.0, 3.0]]
+  column gather_output=True:  [[1.0, 2.0, 3.0, 4.0, 1.0, 2.0]]
+  row weight [out, in_local]: [2, 3]
+  row reduce_results=False: [[4.0, 2.0]]
+  row reduce_results=True:  [[5.0, 8.0]]
+  dense reference: [[5.0, 8.0]]
+rank=1
+  input X: [[1.0, 2.0, 3.0, 4.0]]
+  column weight [out_local, in]: [3, 4]
+  column gather_output=False: [[4.0, 1.0, 2.0]]
+  column gather_output=True:  [[1.0, 2.0, 3.0, 4.0, 1.0, 2.0]]
+  row weight [out, in_local]: [2, 3]
+  row reduce_results=False: [[1.0, 6.0]]
+  row reduce_results=True:  [[5.0, 8.0]]
+  dense reference: [[5.0, 8.0]]
+PASS: actual TokenSpeed ColumnParallelLinear + RowParallelLinear = dense reference

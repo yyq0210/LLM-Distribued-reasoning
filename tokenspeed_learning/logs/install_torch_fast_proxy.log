@@ -1,0 +1,16 @@
+Using Python 3.11.18 environment at: .venv-cu129
+Resolved 32 packages in 2.46s
+Downloading nvidia-cusparselt-cu12 (273.9MiB)
+Downloading nvidia-nccl-cu12 (276.3MiB)
+Downloading torch (828.9MiB)
+Downloading nvidia-nvshmem-cu12 (132.7MiB)
+Downloading nvidia-cusparse-cu12 (206.5MiB)
+Downloading nvidia-cudnn-cu12 (674.0MiB)
+Downloading nvidia-cublas-cu12 (374.9MiB)
+error: Failed to download `nvidia-cufft-cu12==11.3.0.4`
+  cause: Request failed after 3 retries in 126.6s
+  cause: Failed to fetch: https://pypi.nvidia.com/nvidia-cufft-cu12/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl
+  cause: error sending request for url (https://pypi.nvidia.com/nvidia-cufft-cu12/nvidia_cufft_cu12-11.3.0.4-py3-none-manylinux2014_x86_64.manylinux_2_17_x86_64.whl)
+  cause: operation timed out
+
+hint: `nvidia-cufft-cu12` (v11.3.0.4) was included because `torch` (v2.14.0+cu126) depends on `cuda-toolkit[cufft]` (v12.6.3) which depends on `nvidia-cufft-cu12`

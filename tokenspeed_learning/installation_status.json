@@ -1,0 +1,56 @@
+{
+  "status": "communication_learning_ready_full_serving_not_validated",
+  "repository": "https://github.com/lightseekorg/tokenspeed",
+  "checkout": "/home/hadoop-scale-llm/dasc/tokenspeed",
+  "commit": "8289d0f4a9e122cec9ad7bc7bbb843fd9ade1613",
+  "source_worktree_clean": true,
+  "python": "/home/hadoop-scale-llm/dasc/tokenspeed/.venv-cu129/bin/python",
+  "versions": {
+    "tokenspeed": "0.1.1",
+    "tokenspeed-kernel": "0.1.5.dev20261123+git8289d0f4",
+    "tokenspeed-engine": "0.1.1.post20261123",
+    "torch": "2.14.0+cu126",
+    "torchvision": "0.29.0+cu126",
+    "nvidia-nccl-cu12": "2.29.3",
+    "tokenspeed-mooncake": "0.3.13.post20261119",
+    "nvidia-cuda-runtime-cu12": "12.6.77"
+  },
+  "cuda_toolkit": "12.9.86 (local user directory; NVIDIA 12.9.1 redistributable components)",
+  "gpu": "2 x NVIDIA H20-3e, sm90; topology NV18",
+  "passed": [
+    "GPU arithmetic on both devices",
+    "PyTorch NCCL AllReduce",
+    "TokenSpeed NcclBackend AllReduce",
+    "TokenSpeed NcclBackend AllGather",
+    "TokenSpeed NcclBackend ReduceScatter",
+    "TokenSpeed NcclBackend AllToAll",
+    "tokenspeed env",
+    "tokenspeed serve --help",
+    "TokenSpeed ColumnParallelLinear + RowParallelLinear on two GPUs, including gather_output and reduce_results variants"
+  ],
+  "not_tested": [
+    "model loading and token generation",
+    "multi-node execution",
+    "MoE/DeepEP or Mooncake transfers",
+    "throughput and latency benchmarks"
+  ],
+  "full_dependency_check": {
+    "passed": false,
+    "diagnostic": "tokenspeed-mooncake 0.3.13.post20261119 has requirement nvidia-cuda-runtime-cu12<13,>=12.9, but you have nvidia-cuda-runtime-cu12 12.6.77."
+  },
+  "compatibility_notes": [
+    "The upstream cu129 constraint prohibits CuTe cu13 compiler libs, but cuDNN frontend requires them. The learning profile installs both compiler flavors; inspection confirmed that the cu12 flavor is loaded on this driver.",
+    "Mooncake dependency resolution was excluded from the learning profile because its CUDA runtime >=12.9 requirement conflicts with torch cu126 metadata. Its installed wheel is not validated for use.",
+    "No global CUDA, driver, original conda environment, or existing GPU stress process was changed.",
+    "Native kernels built for sm90a. The successful Marlin object from the same checkout/toolchain was reused after source/object hash and dependency checks; all other groups were rebuilt after completing toolkit headers."
+  ],
+  "lesson_01": "bash /home/hadoop-scale-llm/dasc/tokenspeed_learning/run_lesson_01.sh",
+  "lesson_02": "bash /home/hadoop-scale-llm/dasc/tokenspeed_learning/run_lesson_02.sh",
+  "multi_node_template": "run_two_nodes.sh (not executed across nodes)",
+  "lesson_04": "bash /home/hadoop-scale-llm/dasc/tokenspeed_learning/run_lesson_04.sh",
+  "mapping_example": {
+    "script": "05_mapping.py",
+    "execution": "CPU-only Mapping calculation; no eight-GPU deployment or cross-node run",
+    "log": "logs/05_mapping.log"
+  }
+}

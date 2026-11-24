@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1480" viewBox="0 0 1600 1480">
+<title>wo_a 与 wo_b：把各 head 的输出变回 hidden</title>
+<rect width="1600" height="1480" fill="#F5F7FB"/>
+<text x="50" y="54" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="42" fill="#14243A">wo_a 与 wo_b：把各 head 的输出变回 hidden</text>
+<text x="50" y="110" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#52627B">只追踪一个 token t3 · TP2 · o 表示 output，a/b 表示先后两段；两卡都执行两段</text>
+<text x="385" y="180" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="30" fill="#2563EB">GPU 0：heads 0–31</text>
+<rect x="100" y="225" width="570" height="100" rx="16" fill="#FBE1E1" stroke="#2563EB" stroke-width="2"/>
+<text x="385.0" y="255.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">Attention 输出 → inverse RoPE</text>
+<text x="385.0" y="300.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">本 token 的 32 heads：[32,512]</text>
+<line x1="385" y1="333" x2="385" y2="380" stroke="#2563EB" stroke-width="3"/>
+<polygon points="385,380 391.0,367.0 379.0,367.0" fill="#2563EB"/>
+<rect x="100" y="390" width="570" height="105" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="385.0" y="421.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">按组整理：groups 0–3</text>
+<text x="385.0" y="468.75" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">4 组，每组 8 heads：[4,4096]</text>
+<line x1="385" y1="503" x2="385" y2="550" stroke="#2563EB" stroke-width="3"/>
+<polygon points="385,550 391.0,537.0 379.0,537.0" fill="#2563EB"/>
+<rect x="100" y="560" width="570" height="130" rx="16" fill="#FFF0CC" stroke="#2563EB" stroke-width="2"/>
+<text x="385.0" y="599.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">wo_a：每组独立 4096 → 1024</text>
+<text x="385.0" y="657.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">4 个不同的组权重；输出 [4,1024]</text>
+<line x1="385" y1="698" x2="385" y2="745" stroke="#2563EB" stroke-width="3"/>
+<polygon points="385,745 391.0,732.0 379.0,732.0" fill="#2563EB"/>
+<rect x="100" y="755" width="570" height="105" rx="16" fill="#E6F4DC" stroke="#2563EB" stroke-width="2"/>
+<text x="385.0" y="786.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">拼接本卡 4 组结果</text>
+<text x="385.0" y="833.75" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">Z0：[4096]；同一个 token 的特征</text>
+<line x1="385" y1="868" x2="385" y2="915" stroke="#2563EB" stroke-width="3"/>
+<polygon points="385,915 391.0,902.0 379.0,902.0" fill="#2563EB"/>
+<rect x="100" y="925" width="570" height="130" rx="16" fill="#EDE6F8" stroke="#2563EB" stroke-width="2"/>
+<text x="385.0" y="964.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">wo_b：本卡权重分片 [4096,5120]</text>
+<text x="385.0" y="1022.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">P0：[5120]；仅本卡 groups 的贡献</text>
+<text x="1215" y="180" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="30" fill="#087F79">GPU 1：heads 32–63</text>
+<rect x="930" y="225" width="570" height="100" rx="16" fill="#FBE1E1" stroke="#087F79" stroke-width="2"/>
+<text x="1215.0" y="255.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#087F79">Attention 输出 → inverse RoPE</text>
+<text x="1215.0" y="300.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">本 token 的 32 heads：[32,512]</text>
+<line x1="1215" y1="333" x2="1215" y2="380" stroke="#087F79" stroke-width="3"/>
+<polygon points="1215,380 1221.0,367.0 1209.0,367.0" fill="#087F79"/>
+<rect x="930" y="390" width="570" height="105" rx="16" fill="#FFFFFF" stroke="#087F79" stroke-width="2"/>
+<text x="1215.0" y="421.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#087F79">按组整理：groups 4–7</text>
+<text x="1215.0" y="468.75" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">4 组，每组 8 heads：[4,4096]</text>
+<line x1="1215" y1="503" x2="1215" y2="550" stroke="#087F79" stroke-width="3"/>
+<polygon points="1215,550 1221.0,537.0 1209.0,537.0" fill="#087F79"/>
+<rect x="930" y="560" width="570" height="130" rx="16" fill="#FFF0CC" stroke="#087F79" stroke-width="2"/>
+<text x="1215.0" y="599.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#087F79">wo_a：每组独立 4096 → 1024</text>
+<text x="1215.0" y="657.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">4 个不同的组权重；输出 [4,1024]</text>
+<line x1="1215" y1="698" x2="1215" y2="745" stroke="#087F79" stroke-width="3"/>
+<polygon points="1215,745 1221.0,732.0 1209.0,732.0" fill="#087F79"/>
+<rect x="930" y="755" width="570" height="105" rx="16" fill="#E6F4DC" stroke="#087F79" stroke-width="2"/>
+<text x="1215.0" y="786.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#087F79">拼接本卡 4 组结果</text>
+<text x="1215.0" y="833.75" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">Z1：[4096]；同一个 token 的特征</text>
+<line x1="1215" y1="868" x2="1215" y2="915" stroke="#087F79" stroke-width="3"/>
+<polygon points="1215,915 1221.0,902.0 1209.0,902.0" fill="#087F79"/>
+<rect x="930" y="925" width="570" height="130" rx="16" fill="#EDE6F8" stroke="#087F79" stroke-width="2"/>
+<text x="1215.0" y="964.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#087F79">wo_b：本卡权重分片 [4096,5120]</text>
+<text x="1215.0" y="1022.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">P1：[5120]；仅本卡 groups 的贡献</text>
+<text x="800" y="1100" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#14243A">完整 Wob = [8192,5120]，按输入维分片；不是每卡各有完整 Wob</text>
+<line x1="385" y1="1145" x2="1215" y2="1145" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1215,1145 1202.0,1139.0 1202.0,1151.0" fill="#2563EB"/>
+<text x="800" y="1188" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">ReduceScatter 中，t3 的 P0 发给 GPU1，与 P1 求和</text>
+<line x1="1215" y1="1215" x2="1215" y2="1250" stroke="#087F79" stroke-width="3"/>
+<polygon points="1215,1250 1221.0,1237.0 1209.0,1237.0" fill="#087F79"/>
+<rect x="930" y="1260" width="570" height="100" rx="16" fill="#FFFFFF" stroke="#087F79" stroke-width="2"/>
+<text x="1215.0" y="1290.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#087F79">GPU1 收到 t3 的完整输出</text>
+<text x="1215.0" y="1335.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">Y(t3) = P0(t3) + P1(t3)：[5120]</text>
+<text x="385" y="1300" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#52627B">GPU0 收到的是 t0、t1 的完整输出</text>
+<text x="800" y="1425" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">wo_a：组内压缩；wo_b：映射到 hidden 并求和。整个过程不混合不同 token。</text>
+</svg>

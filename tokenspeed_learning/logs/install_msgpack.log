@@ -1,0 +1,5 @@
+Using Python 3.11.18 environment at: .venv-cu129
+Resolved 1 package in 602ms
+Prepared 1 package in 1.30s
+Installed 1 package in 5ms
+ + msgpack==1.2.4

@@ -1,0 +1,7 @@
+CPU formula demonstration; no GPU or distributed communication
+shard 0: local_output=17.500000, LSE=1.386294, merge_weight=0.400000
+shard 1: local_output=36.666667, LSE=1.791759, merge_weight=0.600000
+naive average (wrong): 27.083333
+LSE-weighted merge: 29.000000
+full attention:    29.000000
+PASS: LSE-weighted merge equals full attention within 1e-12

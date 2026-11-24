@@ -1,0 +1,9 @@
+rank=0, local_rank=0, GPU=NVIDIA H20-3e
+  自己算出的部分结果: [1.0, 2.0]
+  AllReduce(SUM) 后:  [4.0, 6.0]
+  完整矩阵参考答案:   [4.0, 6.0]
+rank=1, local_rank=1, GPU=NVIDIA H20-3e
+  自己算出的部分结果: [3.0, 4.0]
+  AllReduce(SUM) 后:  [4.0, 6.0]
+  完整矩阵参考答案:   [4.0, 6.0]
+PASS: api=tokenspeed，两张卡都得到完整答案 [4.0, 6.0]

@@ -1,0 +1,17 @@
+CPU arithmetic only; no GPU or network execution
+world=4; attention TP=2 DP=2; routed experts TP=1 EP=4 DP=1
+tokens=16; per-DP=8; unique rows/rank=4; H=4096; E=8; topk=2; BF16
+dispatch count matrix (source rows, destination columns):
+[2, 2, 2, 2]
+[2, 2, 2, 2]
+[2, 2, 2, 2]
+[2, 2, 2, 2]
+rows per expert: [4, 4, 4, 4, 4, 4, 4, 4]
+allgather: 96 KiB sent per rank
+reduce_scatter: 96 KiB sent per rank
+allgather_plus_reduce_scatter: 192 KiB sent per rank
+alltoall_dispatch: 48 KiB sent per rank
+alltoall_return: 48 KiB sent per rank
+alltoall_dispatch_plus_return: 96 KiB sent per rank
+PASS: broadcast/local-filter/reduce and routed-return have identical scalar sums
+Not a performance measurement; excludes shared branch and other communication

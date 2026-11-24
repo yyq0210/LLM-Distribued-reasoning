@@ -1,0 +1,3 @@
+[submodule "tokenspeed"]
+	path = tokenspeed
+	url = https://github.com/lightseekorg/tokenspeed.git

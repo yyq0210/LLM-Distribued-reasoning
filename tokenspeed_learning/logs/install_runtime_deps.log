@@ -1,0 +1,4 @@
+Using Python 3.11.18 environment at: .venv-cu129
+error: No solution found when resolving dependencies
+  cause: Because nvidia-cutlass-dsl[cu13]==4.8.0 depends on nvidia-cutlass-dsl-libs-cu13<0, which does not allow any versions and nvidia-cudnn-frontend==1.32.0 depends on nvidia-cutlass-dsl[cu13]>=4.8.0, we can conclude that nvidia-cudnn-frontend==1.32.0 depends on nvidia-cutlass-dsl>=4.8.1.
+         And because you require nvidia-cutlass-dsl==4.8.0 and nvidia-cudnn-frontend==1.32.0, we can conclude that your requirements are unsatisfiable.

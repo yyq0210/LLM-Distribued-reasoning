@@ -1,0 +1,570 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="3790" viewBox="0 0 1600 3790">
+<title>MoE 三个版本：每张 GPU 一列，看见 TP、DP、EP 与 SP</title>
+<rect width="1600" height="3790" fill="#F5F7FB"/>
+<text x="50" y="54" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="42" fill="#14243A">MoE 三个版本：每张 GPU 一列，看见 TP、DP、EP 与 SP</text>
+<text x="50" y="110" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#52627B">蓝框：一个 attention DP 副本 / TP2组   ·   紫框：跨四卡的 EP4组   ·   色块：实际 token 行</text>
+<rect x="25" y="160" width="1550" height="1155" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="55" y="195" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="32" fill="#2563EB">① 基础 AllGather：Attention 副本内复制，跨 DP 收集</text>
+<line x1="395" y1="305" x2="395" y2="1210" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="720" y1="305" x2="720" y2="1210" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="1045" y1="305" x2="1045" y2="1210" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="1370" y1="305" x2="1370" y2="1210" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<rect x="245" y="235" width="625" height="210" rx="16" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+<text x="557" y="261" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">Attention DP 副本 0 · TP组 (0,1)</text>
+<text x="395" y="299" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 0</text>
+<rect x="260" y="320" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="395" y="340" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 0–15</text>
+<text x="395" y="368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<text x="720" y="299" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 1</text>
+<rect x="585" y="320" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="720" y="340" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 16–31</text>
+<text x="720" y="368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<line x1="395" y1="417" x2="720" y2="417" stroke="#2563EB" stroke-width="3"/>
+<polygon points="720,417 707.0,411.0 707.0,423.0" fill="#2563EB"/>
+<line x1="720" y1="417" x2="395" y2="417" stroke="#2563EB" stroke-width="3"/>
+<polygon points="395,417 408.0,423.0 408.0,411.0" fill="#2563EB"/>
+<rect x="447.5" y="398" width="220" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="557.5" y="417" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllReduce</text>
+<rect x="895" y="235" width="625" height="210" rx="16" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+<text x="1207" y="261" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">Attention DP 副本 1 · TP组 (2,3)</text>
+<text x="1045" y="299" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 2</text>
+<rect x="910" y="320" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1045" y="340" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 0–15</text>
+<text x="1045" y="368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<text x="1370" y="299" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 3</text>
+<rect x="1235" y="320" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1370" y="340" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 16–31</text>
+<text x="1370" y="368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<line x1="1045" y1="417" x2="1370" y2="417" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1370,417 1357.0,411.0 1357.0,423.0" fill="#2563EB"/>
+<line x1="1370" y1="417" x2="1045" y2="417" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1045,417 1058.0,423.0 1058.0,411.0" fill="#2563EB"/>
+<rect x="1097.5" y="398" width="220" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="1207.5" y="417" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllReduce</text>
+<text x="52" y="345" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">Attention</text>
+<text x="52" y="376" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">按 head 分工</text>
+<text x="52" y="486" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">Norm 输入</text>
+<text x="52" y="517" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">H = 4096</text>
+<line x1="395" y1="449" x2="395" y2="469" stroke="#2563EB" stroke-width="3"/>
+<polygon points="395,469 401.0,456.0 389.0,456.0" fill="#2563EB"/>
+<rect x="260" y="472" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="495" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="272" y="515" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="398" y="515" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="458" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="720" y1="449" x2="720" y2="469" stroke="#2563EB" stroke-width="3"/>
+<polygon points="720,469 726.0,456.0 714.0,456.0" fill="#2563EB"/>
+<rect x="585" y="472" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="495" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="597" y="515" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="657" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="723" y="515" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="783" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="1045" y1="449" x2="1045" y2="469" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1045,469 1051.0,456.0 1039.0,456.0" fill="#2563EB"/>
+<rect x="910" y="472" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="495" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="922" y="515" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1048" y="515" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1108" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<line x1="1370" y1="449" x2="1370" y2="469" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1370,469 1376.0,456.0 1364.0,456.0" fill="#2563EB"/>
+<rect x="1235" y="472" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="495" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="1247" y="515" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="1307" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1373" y="515" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1433" y="529" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<rect x="245" y="770" width="1300" height="145" rx="16" fill="#F3EEFC" stroke="#7654C4" stroke-width="2"/>
+<text x="895" y="793" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#7654C4">一个 EP4 组 (0,1,2,3)：8 个专家分布在四卡，跨越两个 attention 副本</text>
+<text x="52" y="593" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#B95A11">跨 DP 收集</text>
+<text x="52" y="624" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#B95A11">每卡得到 A+B</text>
+<line x1="395" y1="559" x2="395" y2="595" stroke="#B95A11" stroke-width="2"/>
+<line x1="1045" y1="559" x2="1045" y2="595" stroke="#B95A11" stroke-width="2"/>
+<line x1="720" y1="559" x2="720" y2="642" stroke="#B95A11" stroke-width="2"/>
+<line x1="1370" y1="559" x2="1370" y2="642" stroke="#B95A11" stroke-width="2"/>
+<line x1="395" y1="595" x2="1045" y2="595" stroke="#B95A11" stroke-width="3"/>
+<polygon points="1045,595 1032.0,589.0 1032.0,601.0" fill="#B95A11"/>
+<line x1="1045" y1="595" x2="395" y2="595" stroke="#B95A11" stroke-width="3"/>
+<polygon points="395,595 408.0,601.0 408.0,589.0" fill="#B95A11"/>
+<rect x="582.5" y="576" width="275" height="38" rx="16" fill="#FFFFFF" stroke="#B95A11" stroke-width="2"/>
+<text x="720.0" y="595" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#B95A11">DP组 (0,2) AG</text>
+<line x1="720" y1="642" x2="1370" y2="642" stroke="#B95A11" stroke-width="3"/>
+<polygon points="1370,642 1357.0,636.0 1357.0,648.0" fill="#B95A11"/>
+<line x1="1370" y1="642" x2="720" y2="642" stroke="#B95A11" stroke-width="3"/>
+<polygon points="720,642 733.0,648.0 733.0,636.0" fill="#B95A11"/>
+<rect x="907.5" y="623" width="275" height="38" rx="16" fill="#FFFFFF" stroke="#B95A11" stroke-width="2"/>
+<text x="1045.0" y="642" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#B95A11">DP组 (1,3) AG</text>
+<line x1="395" y1="655" x2="395" y2="683" stroke="#B95A11" stroke-width="3"/>
+<polygon points="395,683 401.0,670.0 389.0,670.0" fill="#B95A11"/>
+<rect x="260" y="688" width="270" height="60" rx="16" fill="#FFF6EC" stroke="#B95A11" stroke-width="2"/>
+<text x="395" y="708" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#14243A">A + B（无重复）</text>
+<text x="395" y="733" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">[16,H]</text>
+<line x1="395" y1="750" x2="395" y2="768" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,768 401.0,755.0 389.0,755.0" fill="#7654C4"/>
+<line x1="720" y1="655" x2="720" y2="683" stroke="#B95A11" stroke-width="3"/>
+<polygon points="720,683 726.0,670.0 714.0,670.0" fill="#B95A11"/>
+<rect x="585" y="688" width="270" height="60" rx="16" fill="#FFF6EC" stroke="#B95A11" stroke-width="2"/>
+<text x="720" y="708" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#14243A">A + B（无重复）</text>
+<text x="720" y="733" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">[16,H]</text>
+<line x1="720" y1="750" x2="720" y2="768" stroke="#7654C4" stroke-width="3"/>
+<polygon points="720,768 726.0,755.0 714.0,755.0" fill="#7654C4"/>
+<line x1="1045" y1="655" x2="1045" y2="683" stroke="#B95A11" stroke-width="3"/>
+<polygon points="1045,683 1051.0,670.0 1039.0,670.0" fill="#B95A11"/>
+<rect x="910" y="688" width="270" height="60" rx="16" fill="#FFF6EC" stroke="#B95A11" stroke-width="2"/>
+<text x="1045" y="708" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#14243A">A + B（无重复）</text>
+<text x="1045" y="733" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">[16,H]</text>
+<line x1="1045" y1="750" x2="1045" y2="768" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1045,768 1051.0,755.0 1039.0,755.0" fill="#7654C4"/>
+<line x1="1370" y1="655" x2="1370" y2="683" stroke="#B95A11" stroke-width="3"/>
+<polygon points="1370,683 1376.0,670.0 1364.0,670.0" fill="#B95A11"/>
+<rect x="1235" y="688" width="270" height="60" rx="16" fill="#FFF6EC" stroke="#B95A11" stroke-width="2"/>
+<text x="1370" y="708" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#14243A">A + B（无重复）</text>
+<text x="1370" y="733" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">[16,H]</text>
+<line x1="1370" y1="750" x2="1370" y2="768" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1370,768 1376.0,755.0 1364.0,755.0" fill="#7654C4"/>
+<text x="52" y="832" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">本地专家</text>
+<text x="52" y="863" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">按路由筛选</text>
+<rect x="260" y="818" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="395" y="841" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU0：E0 / E1</text>
+<text x="395" y="874" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="585" y="818" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="720" y="841" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU1：E2 / E3</text>
+<text x="720" y="874" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="910" y="818" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="1045" y="841" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU2：E4 / E5</text>
+<text x="1045" y="874" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="1235" y="818" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="1370" y="841" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU3：E6 / E7</text>
+<text x="1370" y="874" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<text x="52" y="956" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">合并专家贡献</text>
+<text x="52" y="987" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">不是 attention RS</text>
+<line x1="395" y1="918" x2="395" y2="942" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,942 401.0,929.0 389.0,929.0" fill="#7654C4"/>
+<line x1="720" y1="918" x2="720" y2="942" stroke="#7654C4" stroke-width="3"/>
+<polygon points="720,942 726.0,929.0 714.0,929.0" fill="#7654C4"/>
+<line x1="1045" y1="918" x2="1045" y2="942" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1045,942 1051.0,929.0 1039.0,929.0" fill="#7654C4"/>
+<line x1="1370" y1="918" x2="1370" y2="942" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1370,942 1376.0,929.0 1364.0,929.0" fill="#7654C4"/>
+<rect x="245" y="947" width="1300" height="42" rx="16" fill="#F3EEFC" stroke="#7654C4" stroke-width="2"/>
+<text x="895" y="968" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">EP4 ReduceScatter：每卡部分贡献 [16,H] → 按 token 求和后，各取 [4,H]</text>
+<line x1="395" y1="993" x2="395" y2="1015" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,1015 401.0,1002.0 389.0,1002.0" fill="#7654C4"/>
+<line x1="720" y1="993" x2="720" y2="1015" stroke="#7654C4" stroke-width="3"/>
+<polygon points="720,1015 726.0,1002.0 714.0,1002.0" fill="#7654C4"/>
+<line x1="1045" y1="993" x2="1045" y2="1015" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1045,1015 1051.0,1002.0 1039.0,1002.0" fill="#7654C4"/>
+<line x1="1370" y1="993" x2="1370" y2="1015" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1370,1015 1376.0,1002.0 1364.0,1002.0" fill="#7654C4"/>
+<rect x="260" y="1021" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="1044" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="272" y="1064" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="1078" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="585" y="1021" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="1044" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="597" y="1064" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="657" y="1078" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<rect x="910" y="1021" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="1044" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="922" y="1064" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="1078" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1235" y="1021" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="1044" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="1247" y="1064" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1307" y="1078" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="52" y="1169" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">恢复 TP 输入布局</text>
+<text x="52" y="1200" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">组内再次复制</text>
+<line x1="395" y1="1131" x2="720" y2="1131" stroke="#2563EB" stroke-width="3"/>
+<polygon points="720,1131 707.0,1125.0 707.0,1137.0" fill="#2563EB"/>
+<line x1="720" y1="1131" x2="395" y2="1131" stroke="#2563EB" stroke-width="3"/>
+<polygon points="395,1131 408.0,1137.0 408.0,1125.0" fill="#2563EB"/>
+<rect x="445.0" y="1112" width="225" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="557.5" y="1131" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllGather</text>
+<line x1="1045" y1="1131" x2="1370" y2="1131" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1370,1131 1357.0,1125.0 1357.0,1137.0" fill="#2563EB"/>
+<line x1="1370" y1="1131" x2="1045" y2="1131" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1045,1131 1058.0,1137.0 1058.0,1125.0" fill="#2563EB"/>
+<rect x="1095.0" y="1112" width="225" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="1207.5" y="1131" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllGather</text>
+<rect x="260" y="1155" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="1178" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="272" y="1198" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="398" y="1198" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="458" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<rect x="585" y="1155" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="1178" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="597" y="1198" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="657" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="723" y="1198" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="783" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<rect x="910" y="1155" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="1178" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="922" y="1198" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1048" y="1198" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1108" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<rect x="1235" y="1155" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="1178" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="1247" y="1198" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="1307" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1373" y="1198" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1433" y="1212" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="55" y="1270" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">共享分支（并列，未展开）：每个 TP2 组计算共享 MLP → AllReduce，输出 [8,H] 与路由结果相加。</text>
+<rect x="25" y="1350" width="1550" height="1155" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="55" y="1385" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="32" fill="#7654C4">② 改用 AllToAll：指定 owner，再按专家目的地发送</text>
+<line x1="395" y1="1495" x2="395" y2="2400" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="720" y1="1495" x2="720" y2="2400" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="1045" y1="1495" x2="1045" y2="2400" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="1370" y1="1495" x2="1370" y2="2400" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<rect x="245" y="1425" width="625" height="210" rx="16" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+<text x="557" y="1451" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">Attention DP 副本 0 · TP组 (0,1)</text>
+<text x="395" y="1489" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 0</text>
+<rect x="260" y="1510" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="395" y="1530" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 0–15</text>
+<text x="395" y="1558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<text x="720" y="1489" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 1</text>
+<rect x="585" y="1510" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="720" y="1530" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 16–31</text>
+<text x="720" y="1558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<line x1="395" y1="1607" x2="720" y2="1607" stroke="#2563EB" stroke-width="3"/>
+<polygon points="720,1607 707.0,1601.0 707.0,1613.0" fill="#2563EB"/>
+<line x1="720" y1="1607" x2="395" y2="1607" stroke="#2563EB" stroke-width="3"/>
+<polygon points="395,1607 408.0,1613.0 408.0,1601.0" fill="#2563EB"/>
+<rect x="447.5" y="1588" width="220" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="557.5" y="1607" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllReduce</text>
+<rect x="895" y="1425" width="625" height="210" rx="16" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+<text x="1207" y="1451" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">Attention DP 副本 1 · TP组 (2,3)</text>
+<text x="1045" y="1489" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 2</text>
+<rect x="910" y="1510" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1045" y="1530" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 0–15</text>
+<text x="1045" y="1558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<text x="1370" y="1489" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 3</text>
+<rect x="1235" y="1510" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1370" y="1530" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 16–31</text>
+<text x="1370" y="1558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<line x1="1045" y1="1607" x2="1370" y2="1607" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1370,1607 1357.0,1601.0 1357.0,1613.0" fill="#2563EB"/>
+<line x1="1370" y1="1607" x2="1045" y2="1607" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1045,1607 1058.0,1613.0 1058.0,1601.0" fill="#2563EB"/>
+<rect x="1097.5" y="1588" width="220" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="1207.5" y="1607" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllReduce</text>
+<text x="52" y="1535" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">Attention</text>
+<text x="52" y="1566" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">按 head 分工</text>
+<text x="52" y="1676" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">Norm 输入</text>
+<text x="52" y="1707" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">H = 4096</text>
+<line x1="395" y1="1639" x2="395" y2="1659" stroke="#2563EB" stroke-width="3"/>
+<polygon points="395,1659 401.0,1646.0 389.0,1646.0" fill="#2563EB"/>
+<rect x="260" y="1662" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="1685" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="272" y="1705" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="398" y="1705" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="458" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="720" y1="1639" x2="720" y2="1659" stroke="#2563EB" stroke-width="3"/>
+<polygon points="720,1659 726.0,1646.0 714.0,1646.0" fill="#2563EB"/>
+<rect x="585" y="1662" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="1685" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="597" y="1705" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="657" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="723" y="1705" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="783" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="1045" y1="1639" x2="1045" y2="1659" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1045,1659 1051.0,1646.0 1039.0,1646.0" fill="#2563EB"/>
+<rect x="910" y="1662" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="1685" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="922" y="1705" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1048" y="1705" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1108" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<line x1="1370" y1="1639" x2="1370" y2="1659" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1370,1659 1376.0,1646.0 1364.0,1646.0" fill="#2563EB"/>
+<rect x="1235" y="1662" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="1685" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[8,H] 完整数值</text>
+<rect x="1247" y="1705" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="1307" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1373" y="1705" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1433" y="1719" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<rect x="245" y="1960" width="1300" height="145" rx="16" fill="#F3EEFC" stroke="#7654C4" stroke-width="2"/>
+<text x="1290" y="1983" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#7654C4">EP4 组 (0,1,2,3)</text>
+<text x="52" y="1792" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">dispatch 输入</text>
+<text x="52" y="1823" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">唯一 owner</text>
+<line x1="395" y1="1749" x2="395" y2="1773" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,1773 401.0,1760.0 389.0,1760.0" fill="#7654C4"/>
+<rect x="260" y="1776" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="1799" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本地选 4 行 owner</text>
+<rect x="272" y="1819" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="1833" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<line x1="720" y1="1749" x2="720" y2="1773" stroke="#7654C4" stroke-width="3"/>
+<polygon points="720,1773 726.0,1760.0 714.0,1760.0" fill="#7654C4"/>
+<rect x="585" y="1776" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="1799" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本地选 4 行 owner</text>
+<rect x="597" y="1819" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="657" y="1833" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="1045" y1="1749" x2="1045" y2="1773" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1045,1773 1051.0,1760.0 1039.0,1760.0" fill="#7654C4"/>
+<rect x="910" y="1776" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="1799" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本地选 4 行 owner</text>
+<rect x="922" y="1819" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="1833" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<line x1="1370" y1="1749" x2="1370" y2="1773" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1370,1773 1376.0,1760.0 1364.0,1760.0" fill="#7654C4"/>
+<rect x="1235" y="1776" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="1799" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本地选 4 行 owner</text>
+<rect x="1247" y="1819" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1307" y="1833" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="865" y="1890" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">只画 t1 的 Top-2：E3 在 GPU1，E4 在 GPU2；其余 token 路径省略</text>
+<rect x="290.0" y="1886" width="210" height="38" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="395" y="1905" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">t1 @ GPU0</text>
+<line x1="395" y1="1928" x2="720" y2="2000" stroke="#7654C4" stroke-width="3"/>
+<polygon points="720,2000 708.6054986311613,1991.3302053913872 706.0099676048821,2003.0461440516747" fill="#7654C4"/>
+<line x1="395" y1="1928" x2="1045" y2="2000" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1045,2000 1032.7396025165554,1992.6052279583514 1031.4184521766083,2004.5322796384298" fill="#7654C4"/>
+<text x="52" y="2022" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">AllToAll dispatch</text>
+<text x="52" y="2053" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">跨 DP 找专家</text>
+<rect x="260" y="2008" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="395" y="2031" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU0：E0 / E1</text>
+<text x="395" y="2064" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="585" y="2008" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="720" y="2031" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU1：E2 / E3</text>
+<text x="720" y="2064" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="910" y="2008" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="1045" y="2031" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU2：E4 / E5</text>
+<text x="1045" y="2064" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="1235" y="2008" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="1370" y="2031" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU3：E6 / E7</text>
+<text x="1370" y="2064" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<text x="52" y="2139" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">AllToAll 返回</text>
+<text x="52" y="2170" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">owner 加权合并</text>
+<line x1="720" y1="2108" x2="395" y2="2204" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,2204 409.16717384647023,2206.071517608878 405.76776033446566,2194.5630864484456" fill="#7654C4"/>
+<line x1="1045" y1="2108" x2="395" y2="2204" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,2204 408.7371378683553,2208.0362164443695 406.983849277136,2196.1649916079887" fill="#7654C4"/>
+<text x="1125" y="2149" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#7654C4">E3、E4 的结果回到 t1 的 owner GPU0</text>
+<text x="1125" y="2182" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">其他 token 同样返回各自 owner，连线省略</text>
+<rect x="260" y="2211" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="2234" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="272" y="2254" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="2268" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="585" y="2211" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="2234" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="597" y="2254" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="657" y="2268" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<rect x="910" y="2211" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="2234" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="922" y="2254" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="2268" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1235" y="2211" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="2234" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="1247" y="2254" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1307" y="2268" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="52" y="2359" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">恢复 TP 输入布局</text>
+<text x="52" y="2390" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">组内再次复制</text>
+<line x1="395" y1="2321" x2="720" y2="2321" stroke="#2563EB" stroke-width="3"/>
+<polygon points="720,2321 707.0,2315.0 707.0,2327.0" fill="#2563EB"/>
+<line x1="720" y1="2321" x2="395" y2="2321" stroke="#2563EB" stroke-width="3"/>
+<polygon points="395,2321 408.0,2327.0 408.0,2315.0" fill="#2563EB"/>
+<rect x="445.0" y="2302" width="225" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="557.5" y="2321" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllGather</text>
+<line x1="1045" y1="2321" x2="1370" y2="2321" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1370,2321 1357.0,2315.0 1357.0,2327.0" fill="#2563EB"/>
+<line x1="1370" y1="2321" x2="1045" y2="2321" stroke="#2563EB" stroke-width="3"/>
+<polygon points="1045,2321 1058.0,2327.0 1058.0,2315.0" fill="#2563EB"/>
+<rect x="1095.0" y="2302" width="225" height="38" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="1207.5" y="2321" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#2563EB">TP2 AllGather</text>
+<rect x="260" y="2345" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="2368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="272" y="2388" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="398" y="2388" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="458" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<rect x="585" y="2345" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="2368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="597" y="2388" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="657" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="723" y="2388" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="783" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<rect x="910" y="2345" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="2368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="922" y="2388" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1048" y="2388" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1108" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<rect x="1235" y="2345" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="2368" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">恢复 [8,H]</text>
+<rect x="1247" y="2388" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="1307" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1373" y="2388" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1433" y="2402" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="55" y="2460" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">共享分支（并列，未展开）：每个 TP2 组计算共享 MLP → AllReduce，输出 [8,H] 与路由结果相加。</text>
+<rect x="25" y="2540" width="1550" height="1155" rx="16" fill="#FFFFFF" stroke="#087F79" stroke-width="2"/>
+<text x="55" y="2575" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="32" fill="#087F79">③ AllToAll + SP：Attention 后直接保留不重复 token</text>
+<line x1="395" y1="2685" x2="395" y2="3590" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="720" y1="2685" x2="720" y2="3590" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="1045" y1="2685" x2="1045" y2="3590" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<line x1="1370" y1="2685" x2="1370" y2="3590" stroke="#CBD5E1" stroke-width="2" stroke-dasharray="6 8"/>
+<rect x="245" y="2615" width="625" height="210" rx="16" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+<text x="557" y="2641" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">Attention DP 副本 0 · TP组 (0,1)</text>
+<text x="395" y="2679" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 0</text>
+<rect x="260" y="2700" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="395" y="2720" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 0–15</text>
+<text x="395" y="2748" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<text x="720" y="2679" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 1</text>
+<rect x="585" y="2700" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="720" y="2720" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 16–31</text>
+<text x="720" y="2748" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<line x1="395" y1="2797" x2="720" y2="2797" stroke="#087F79" stroke-width="3"/>
+<polygon points="720,2797 707.0,2791.0 707.0,2803.0" fill="#087F79"/>
+<line x1="720" y1="2797" x2="395" y2="2797" stroke="#087F79" stroke-width="3"/>
+<polygon points="395,2797 408.0,2803.0 408.0,2791.0" fill="#087F79"/>
+<rect x="447.5" y="2778" width="220" height="38" rx="16" fill="#FFFFFF" stroke="#087F79" stroke-width="2"/>
+<text x="557.5" y="2797" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#087F79">TP2 RS</text>
+<rect x="895" y="2615" width="625" height="210" rx="16" fill="#EAF1FF" stroke="#2563EB" stroke-width="2"/>
+<text x="1207" y="2641" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">Attention DP 副本 1 · TP组 (2,3)</text>
+<text x="1045" y="2679" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 2</text>
+<rect x="910" y="2700" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1045" y="2720" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 0–15</text>
+<text x="1045" y="2748" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<text x="1370" y="2679" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 3</text>
+<rect x="1235" y="2700" width="270" height="65" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+<text x="1370" y="2720" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#14243A">Q heads 16–31</text>
+<text x="1370" y="2748" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">o_proj 部分和 [8,H]</text>
+<line x1="1045" y1="2797" x2="1370" y2="2797" stroke="#087F79" stroke-width="3"/>
+<polygon points="1370,2797 1357.0,2791.0 1357.0,2803.0" fill="#087F79"/>
+<line x1="1370" y1="2797" x2="1045" y2="2797" stroke="#087F79" stroke-width="3"/>
+<polygon points="1045,2797 1058.0,2803.0 1058.0,2791.0" fill="#087F79"/>
+<rect x="1097.5" y="2778" width="220" height="38" rx="16" fill="#FFFFFF" stroke="#087F79" stroke-width="2"/>
+<text x="1207.5" y="2797" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#087F79">TP2 RS</text>
+<text x="52" y="2725" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">Attention</text>
+<text x="52" y="2756" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#2563EB">按 head 分工</text>
+<text x="52" y="2866" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#087F79">Norm 输入</text>
+<text x="52" y="2897" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#087F79">H = 4096</text>
+<line x1="395" y1="2829" x2="395" y2="2849" stroke="#087F79" stroke-width="3"/>
+<polygon points="395,2849 401.0,2836.0 389.0,2836.0" fill="#087F79"/>
+<rect x="260" y="2852" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="2875" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[4,H] 完整数值</text>
+<rect x="272" y="2895" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="2909" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<line x1="720" y1="2829" x2="720" y2="2849" stroke="#087F79" stroke-width="3"/>
+<polygon points="720,2849 726.0,2836.0 714.0,2836.0" fill="#087F79"/>
+<rect x="585" y="2852" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="2875" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[4,H] 完整数值</text>
+<rect x="597" y="2895" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="657" y="2909" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="1045" y1="2829" x2="1045" y2="2849" stroke="#087F79" stroke-width="3"/>
+<polygon points="1045,2849 1051.0,2836.0 1039.0,2836.0" fill="#087F79"/>
+<rect x="910" y="2852" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="2875" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[4,H] 完整数值</text>
+<rect x="922" y="2895" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="2909" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<line x1="1370" y1="2829" x2="1370" y2="2849" stroke="#087F79" stroke-width="3"/>
+<polygon points="1370,2849 1376.0,2836.0 1364.0,2836.0" fill="#087F79"/>
+<rect x="1235" y="2852" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="2875" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#14243A">[4,H] 完整数值</text>
+<rect x="1247" y="2895" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1307" y="2909" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<rect x="245" y="3150" width="1300" height="145" rx="16" fill="#F3EEFC" stroke="#7654C4" stroke-width="2"/>
+<text x="1290" y="3173" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#7654C4">EP4 组 (0,1,2,3)</text>
+<text x="52" y="2982" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#087F79">dispatch 输入</text>
+<text x="52" y="3013" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#087F79">唯一 owner</text>
+<line x1="395" y1="2939" x2="395" y2="2963" stroke="#087F79" stroke-width="3"/>
+<polygon points="395,2963 401.0,2950.0 389.0,2950.0" fill="#087F79"/>
+<rect x="260" y="2966" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="2989" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">直接使用 SP 行</text>
+<rect x="272" y="3009" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="3023" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<line x1="720" y1="2939" x2="720" y2="2963" stroke="#087F79" stroke-width="3"/>
+<polygon points="720,2963 726.0,2950.0 714.0,2950.0" fill="#087F79"/>
+<rect x="585" y="2966" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="2989" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">直接使用 SP 行</text>
+<rect x="597" y="3009" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="657" y="3023" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="1045" y1="2939" x2="1045" y2="2963" stroke="#087F79" stroke-width="3"/>
+<polygon points="1045,2963 1051.0,2950.0 1039.0,2950.0" fill="#087F79"/>
+<rect x="910" y="2966" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="2989" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">直接使用 SP 行</text>
+<rect x="922" y="3009" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="3023" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<line x1="1370" y1="2939" x2="1370" y2="2963" stroke="#087F79" stroke-width="3"/>
+<polygon points="1370,2963 1376.0,2950.0 1364.0,2950.0" fill="#087F79"/>
+<rect x="1235" y="2966" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="2989" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">直接使用 SP 行</text>
+<rect x="1247" y="3009" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1307" y="3023" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="865" y="3080" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">只画 t1 的 Top-2：E3 在 GPU1，E4 在 GPU2；其余 token 路径省略</text>
+<rect x="290.0" y="3076" width="210" height="38" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="395" y="3095" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">t1 @ GPU0</text>
+<line x1="395" y1="3118" x2="720" y2="3190" stroke="#7654C4" stroke-width="3"/>
+<polygon points="720,3190 708.6054986311613,3181.330205391387 706.0099676048821,3193.046144051675" fill="#7654C4"/>
+<line x1="395" y1="3118" x2="1045" y2="3190" stroke="#7654C4" stroke-width="3"/>
+<polygon points="1045,3190 1032.7396025165554,3182.6052279583514 1031.4184521766083,3194.5322796384294" fill="#7654C4"/>
+<text x="52" y="3212" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">AllToAll dispatch</text>
+<text x="52" y="3243" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">跨 DP 找专家</text>
+<rect x="260" y="3198" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="395" y="3221" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU0：E0 / E1</text>
+<text x="395" y="3254" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="585" y="3198" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="720" y="3221" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU1：E2 / E3</text>
+<text x="720" y="3254" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="910" y="3198" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="1045" y="3221" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU2：E4 / E5</text>
+<text x="1045" y="3254" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<rect x="1235" y="3198" width="270" height="78" rx="16" fill="#FFFFFF" stroke="#7654C4" stroke-width="2"/>
+<text x="1370" y="3221" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">GPU3：E6 / E7</text>
+<text x="1370" y="3254" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">8 条任务 · [8,H]</text>
+<text x="52" y="3329" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">AllToAll 返回</text>
+<text x="52" y="3360" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#7654C4">owner 加权合并</text>
+<line x1="720" y1="3298" x2="395" y2="3394" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,3394 409.16717384647023,3396.071517608878 405.76776033446566,3384.5630864484456" fill="#7654C4"/>
+<line x1="1045" y1="3298" x2="395" y2="3394" stroke="#7654C4" stroke-width="3"/>
+<polygon points="395,3394 408.7371378683553,3398.0362164443695 406.983849277136,3386.1649916079887" fill="#7654C4"/>
+<text x="1125" y="3339" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#7654C4">E3、E4 的结果回到 t1 的 owner GPU0</text>
+<text x="1125" y="3372" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="22" fill="#52627B">其他 token 同样返回各自 owner，连线省略</text>
+<rect x="260" y="3401" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="3424" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="272" y="3444" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="3458" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<rect x="585" y="3401" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="3424" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="597" y="3444" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="657" y="3458" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<rect x="910" y="3401" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="3424" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="922" y="3444" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="3458" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<rect x="1235" y="3401" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="3424" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#7654C4">本卡路由结果 [4,H]</text>
+<rect x="1247" y="3444" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1307" y="3458" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="52" y="3549" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#087F79">保持 SP 布局</text>
+<text x="52" y="3580" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#087F79">暂不复制 token</text>
+<line x1="395" y1="3487" x2="395" y2="3528" stroke="#087F79" stroke-width="3"/>
+<polygon points="395,3528 401.0,3515.0 389.0,3515.0" fill="#087F79"/>
+<rect x="260" y="3535" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="395" y="3558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">保留 [4,H]</text>
+<rect x="272" y="3578" width="120" height="28" rx="16" fill="#DBEAFE" stroke="#DBEAFE" stroke-width="2"/>
+<text x="332" y="3592" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A0 · 4行</text>
+<line x1="720" y1="3487" x2="720" y2="3528" stroke="#087F79" stroke-width="3"/>
+<polygon points="720,3528 726.0,3515.0 714.0,3515.0" fill="#087F79"/>
+<rect x="585" y="3535" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="720" y="3558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">保留 [4,H]</text>
+<rect x="597" y="3578" width="120" height="28" rx="16" fill="#BFDBFE" stroke="#BFDBFE" stroke-width="2"/>
+<text x="657" y="3592" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">A1 · 4行</text>
+<line x1="1045" y1="3487" x2="1045" y2="3528" stroke="#087F79" stroke-width="3"/>
+<polygon points="1045,3528 1051.0,3515.0 1039.0,3515.0" fill="#087F79"/>
+<rect x="910" y="3535" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1045" y="3558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">保留 [4,H]</text>
+<rect x="922" y="3578" width="120" height="28" rx="16" fill="#FFEDD5" stroke="#FFEDD5" stroke-width="2"/>
+<text x="982" y="3592" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B0 · 4行</text>
+<line x1="1370" y1="3487" x2="1370" y2="3528" stroke="#087F79" stroke-width="3"/>
+<polygon points="1370,3528 1376.0,3515.0 1364.0,3515.0" fill="#087F79"/>
+<rect x="1235" y="3535" width="270" height="80" rx="16" fill="#FFFFFF" stroke="#C6D2E1" stroke-width="2"/>
+<text x="1370" y="3558" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">保留 [4,H]</text>
+<rect x="1247" y="3578" width="120" height="28" rx="16" fill="#FED7AA" stroke="#FED7AA" stroke-width="2"/>
+<text x="1307" y="3592" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="20" fill="#14243A">B1 · 4行</text>
+<text x="55" y="3650" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#087F79">共享分支（并列，未展开）：TP2 AG → MLP → RS，返回相同 [4,H] 后相加；下一 attention 前按需 AG。</text>
+<text x="50" y="3750" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#52627B">每个 A0/A1/B0/B1 含 4 行，H 均为 4096。仅示意教学数据流，不是网络拓扑或性能测量。</text>
+</svg>

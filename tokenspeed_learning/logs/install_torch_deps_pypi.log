@@ -1,0 +1,29 @@
+Using Python 3.11.18 environment at: .venv-cu129
+Resolved 28 packages in 696ms
+Downloading sympy (6.0MiB)
+Downloading networkx (2.0MiB)
+Downloading triton (236.5MiB)
+Downloading nvidia-cusparse-cu12 (206.5MiB)
+Downloading nvidia-cufile-cu12 (1.1MiB)
+Downloading nvidia-cufft-cu12 (190.9MiB)
+Downloading nvidia-cuda-nvrtc-cu12 (22.6MiB)
+Downloading nvidia-nccl-cu12 (276.3MiB)
+Downloading nvidia-cudnn-cu12 (674.0MiB)
+Downloading nvidia-cublas-cu12 (374.9MiB)
+Downloading nvidia-nvshmem-cu12 (132.7MiB)
+Downloading cuda-bindings (7.3MiB)
+Downloading nvidia-curand-cu12 (53.7MiB)
+Downloading nvidia-cuda-cupti-cu12 (8.5MiB)
+Downloading nvidia-nvjitlink-cu12 (37.9MiB)
+Downloading nvidia-cusolver-cu12 (150.9MiB)
+Downloading nvidia-cusparselt-cu12 (273.9MiB)
+ Downloaded nvidia-cufile-cu12
+ Downloaded networkx
+ Downloaded sympy
+ Downloaded cuda-bindings
+ Downloaded nvidia-cuda-cupti-cu12
+ Downloaded nvidia-cuda-nvrtc-cu12
+ Downloaded nvidia-nvjitlink-cu12
+ Downloaded nvidia-curand-cu12
+ Downloaded nvidia-nvshmem-cu12
+ Downloaded nvidia-cusolver-cu12

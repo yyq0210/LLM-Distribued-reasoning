@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1760" viewBox="0 0 1600 1760">
+<title>DeepSeek V4.1 Flash：Attention 的算子与维度</title>
+<rect width="1600" height="1760" fill="#F5F7FB"/>
+<text x="50" y="54" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="42" fill="#14243A">DeepSeek V4.1 Flash：Attention 的算子与维度</text>
+<text x="50" y="112" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#52627B">单层文本主干 · T=2048 · H=5120 · 64 heads × 512 · 图中先不切 TP</text>
+<rect x="510" y="155" width="580" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="800.0" y="179.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">mHC 交给 Attention 的输入 X</text>
+<text x="800.0" y="215.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">[T,H] = [2048,5120]</text>
+<line x1="800" y1="240" x2="800" y2="273" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,273 806.0,260.0 794.0,260.0" fill="#52627B"/>
+<rect x="510" y="280" width="580" height="75" rx="16" fill="#F1F5F9" stroke="#14243A" stroke-width="2"/>
+<text x="800.0" y="302.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">Attention 输入 RMSNorm</text>
+<text x="800.0" y="336.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">逐 token；完整 H 维</text>
+<line x1="800" y1="360" x2="310" y2="410" stroke="#52627B" stroke-width="3"/>
+<polygon points="310,410 323.54192598098683,414.6493269110135 322.32376172482606,402.71131720063823" fill="#52627B"/>
+<line x1="800" y1="360" x2="800" y2="410" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,410 806.0,397.0 794.0,397.0" fill="#52627B"/>
+<line x1="800" y1="360" x2="1290" y2="410" stroke="#52627B" stroke-width="3"/>
+<polygon points="1290,410 1277.676238275174,402.71131720063823 1276.458074019013,414.6493269110135" fill="#52627B"/>
+<rect x="70" y="420" width="480" height="95" rx="16" fill="#FFF0CC" stroke="#14243A" stroke-width="2"/>
+<text x="310.0" y="448.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">① Q 下投影  wq_a</text>
+<text x="310.0" y="491.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">W: [5120,1280]</text>
+<rect x="570" y="420" width="460" height="95" rx="16" fill="#FFF0CC" stroke="#14243A" stroke-width="2"/>
+<text x="800.0" y="448.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">② 本层 SWA KV  wkv</text>
+<text x="800.0" y="491.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">W: [5120,512]</text>
+<rect x="1060" y="420" width="470" height="95" rx="16" fill="#FFF0CC" stroke="#14243A" stroke-width="2"/>
+<text x="1295.0" y="448.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">③ Global KV 来源</text>
+<text x="1295.0" y="491.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">仅 source layers 产生；其他层复用</text>
+<text x="310" y="550" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">[2048,1280]</text>
+<text x="800" y="550" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#087F79">[2048,512]</text>
+<line x1="310" y1="572" x2="310" y2="605" stroke="#52627B" stroke-width="3"/>
+<polygon points="310,605 316.0,592.0 304.0,592.0" fill="#52627B"/>
+<line x1="800" y1="572" x2="800" y2="605" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,605 806.0,592.0 794.0,592.0" fill="#52627B"/>
+<line x1="1290" y1="522" x2="1290" y2="605" stroke="#52627B" stroke-width="3"/>
+<polygon points="1290,605 1296.0,592.0 1284.0,592.0" fill="#52627B"/>
+<rect x="70" y="615" width="480" height="82" rx="16" fill="#F1F5F9" stroke="#14243A" stroke-width="2"/>
+<text x="310.0" y="639.6" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">q_norm</text>
+<text x="310.0" y="676.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">RMSNorm over 1280</text>
+<rect x="570" y="615" width="460" height="82" rx="16" fill="#F1F5F9" stroke="#14243A" stroke-width="2"/>
+<text x="800.0" y="639.6" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">kv_norm → RoPE</text>
+<text x="800.0" y="676.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">共享 KV 向量；末 64 维旋转</text>
+<rect x="1060" y="615" width="470" height="82" rx="16" fill="#F1F5F9" stroke="#14243A" stroke-width="2"/>
+<text x="1295.0" y="639.6" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">FlatKV / Compressor</text>
+<text x="1295.0" y="676.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">保持请求、原始位置和跨层来源</text>
+<line x1="310" y1="705" x2="310" y2="755" stroke="#52627B" stroke-width="3"/>
+<polygon points="310,755 316.0,742.0 304.0,742.0" fill="#52627B"/>
+<line x1="800" y1="705" x2="800" y2="755" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,755 806.0,742.0 794.0,742.0" fill="#52627B"/>
+<line x1="1290" y1="705" x2="1290" y2="755" stroke="#52627B" stroke-width="3"/>
+<polygon points="1290,755 1296.0,742.0 1284.0,742.0" fill="#52627B"/>
+<rect x="70" y="765" width="480" height="95" rx="16" fill="#E6F4DC" stroke="#14243A" stroke-width="2"/>
+<text x="310.0" y="793.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">④ Q 上投影  wq_b → RoPE</text>
+<text x="310.0" y="836.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">W: [1280,32768]</text>
+<rect x="570" y="765" width="460" height="95" rx="16" fill="#E6F4DC" stroke="#14243A" stroke-width="2"/>
+<text x="800.0" y="793.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">SWA cache / 当前 KV</text>
+<text x="800.0" y="836.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">窗口 128；K/V 共用存储表示</text>
+<rect x="1060" y="765" width="470" height="95" rx="16" fill="#E6F4DC" stroke="#14243A" stroke-width="2"/>
+<text x="1295.0" y="793.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">Indexer / 复用 Top-k</text>
+<text x="1295.0" y="836.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">选择 global positions；最多 512</text>
+<text x="310" y="900" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#2563EB">Q [2048,64,512]</text>
+<text x="800" y="900" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#087F79">KV [可见行数,512]</text>
+<text x="1290" y="900" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#7654C4">global KV + 选择索引</text>
+<line x1="310" y1="930" x2="310" y2="1005" stroke="#52627B" stroke-width="3"/>
+<polygon points="310,1005 316.0,992.0 304.0,992.0" fill="#52627B"/>
+<line x1="800" y1="930" x2="800" y2="1005" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,1005 806.0,992.0 794.0,992.0" fill="#52627B"/>
+<line x1="1290" y1="930" x2="1290" y2="1005" stroke="#52627B" stroke-width="3"/>
+<polygon points="1290,1005 1296.0,992.0 1284.0,992.0" fill="#52627B"/>
+<rect x="70" y="1015" width="1460" height="100" rx="16" fill="#FBE1E1" stroke="#14243A" stroke-width="2"/>
+<text x="800.0" y="1045.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">⑤ Sparse Attention：每个 query 只读本请求允许的位置</text>
+<text x="800.0" y="1090.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">SWA + 被选中的 global KV；causal mask + attention sink</text>
+<line x1="800" y1="1123" x2="800" y2="1170" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,1170 806.0,1157.0 794.0,1157.0" fill="#52627B"/>
+<rect x="300" y="1180" width="1000" height="90" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="800.0" y="1207.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">O [2048,64,512] → inverse RoPE → 按 8 组整理</text>
+<text x="800.0" y="1247.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">每组 8 heads × 512 = 4096；得到 [2048,8,4096]</text>
+<line x1="800" y1="1278" x2="800" y2="1310" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,1310 806.0,1297.0 794.0,1297.0" fill="#52627B"/>
+<rect x="300" y="1320" width="1000" height="95" rx="16" fill="#EDE6F8" stroke="#7654C4" stroke-width="2"/>
+<text x="800.0" y="1348.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#7654C4">⑥ 分组低秩 wo_a：各组 4096 → 1024</text>
+<text x="800.0" y="1391.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">W: [8,4096,1024]；输出 [2048,8,1024]</text>
+<line x1="800" y1="1423" x2="800" y2="1455" stroke="#52627B" stroke-width="3"/>
+<polygon points="800,1455 806.0,1442.0 794.0,1442.0" fill="#52627B"/>
+<rect x="300" y="1465" width="1000" height="95" rx="16" fill="#EDE6F8" stroke="#7654C4" stroke-width="2"/>
+<text x="800.0" y="1493.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#7654C4">⑦ Flatten → wo_b：8192 → 5120</text>
+<text x="800.0" y="1536.25" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">W: [8192,5120]；输出 [2048,5120]</text>
+<text x="800" y="1610" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="28" fill="#14243A">返回 mHC / 后续 MoE；并行时 wo_b 的局部贡献还要求和</text>
+<text x="50" y="1670" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">权重按数学 XW 方向标注，PyTorch 存储通常转置。global 分支仅示意依赖，非完整 CED 图。</text>
+<text x="50" y="1715" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">KV 选择还依赖 X、q latent；图中省略这两条侧向线。量化尺度、Engram、视觉及 DSpark 未展开。</text>
+</svg>

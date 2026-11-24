@@ -1,0 +1,56 @@
+{
+  "model": "deepseek-ai/DeepSeek-V4.1-Flash",
+  "tokens": 2048,
+  "sp": 4,
+  "flops_per_rank_before": {
+    "input_rmsnorm": 41943040,
+    "q_down": 26843545600,
+    "q_latent_rmsnorm": 10485760,
+    "swa_kv_projection": 10737418240
+  },
+  "flops_per_rank_after": {
+    "input_rmsnorm": 10485760,
+    "q_down": 6710886400,
+    "q_latent_rmsnorm": 2621440,
+    "swa_kv_projection": 2684354560
+  },
+  "bf16_allgather_send_mib_per_rank": {
+    "hidden": 15.0,
+    "q_latent_plus_swa_kv": 5.25
+  },
+  "output_weights": {
+    "wo_a_per_layer": 33554432,
+    "wo_b_per_layer": 41943040,
+    "all_40_layers_fp8_payload_gib": 2.8125,
+    "all_40_layers_bf16_payload_gib": 5.625
+  },
+  "causal_pairs": {
+    "contiguous": [
+      10,
+      26
+    ],
+    "zigzag": [
+      18,
+      18
+    ]
+  },
+  "kv_page_owners": {
+    "0": [
+      0,
+      4
+    ],
+    "1": [
+      1,
+      5
+    ],
+    "2": [
+      2,
+      6
+    ],
+    "3": [
+      3,
+      7
+    ]
+  },
+  "source_config_sha256": "8be45ce0476004a3f529fd896115a4a2e800a129ad2d3ec05b16050f52e21879"
+}

@@ -1,0 +1,17 @@
+CPU arithmetic only; no model weights, GPU workers or network collectives
+DeepSeek-V4.1-Flash: H=5120, heads=64, d=512, rq=1280, groups=8, ro=1024
+T=2048, SP=4; 2 FLOPs per multiply-add; BF16 communication example
+input_rmsnorm: 41,943,040 -> 10,485,760 FLOPs/rank
+q_down: 26,843,545,600 -> 6,710,886,400 FLOPs/rank
+q_latent_rmsnorm: 10,485,760 -> 2,621,440 FLOPs/rank
+swa_kv_projection: 10,737,418,240 -> 2,684,354,560 FLOPs/rank
+AllGather hidden: 15.00 MiB sent/rank
+AllGather q_latent_plus_swa_kv: 5.25 MiB sent/rank
+wo_a + wo_b: 33,554,432 + 41,943,040 = 75,497,472 parameters/layer
+40-layer O weights: FP8 payload 2.8125 GiB; BF16 payload 5.6250 GiB
+Causal pairs, contiguous=[10, 26]; zigzag=[18, 18]
+PASS: AllGather commutes with identical row-local norm/projection
+PASS: moving norm before SUM gives a different result (counterexample)
+PASS: mixed-request row permutation restores request/position identities
+PASS: KV-partial LSE merge with sink counted once equals full attention (33.173137884)
+No latency/speedup measurement; communication excludes scales, compressor, metadata and temporary buffers

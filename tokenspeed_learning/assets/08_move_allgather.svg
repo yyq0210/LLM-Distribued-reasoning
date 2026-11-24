@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1310" viewBox="0 0 1600 1310">
+<title>优化一：把 AllGather 移到逐 token 小投影之后</title>
+<rect width="1600" height="1310" fill="#F5F7FB"/>
+<text x="50" y="54" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="42" fill="#14243A">优化一：把 AllGather 移到逐 token 小投影之后</text>
+<text x="50" y="110" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#52627B">两卡 SP2 示意 · T=2048 · 两边使用相同权重 · 起点已经完成 SUM / ReduceScatter</text>
+<rect x="50" y="160" width="725" height="965" rx="16" fill="#FFFFFF" stroke="#2563EB" stroke-width="2"/>
+<text x="412" y="203" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="30" fill="#2563EB">原始：先收齐，再重复算</text>
+<text x="237" y="260" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 0</text>
+<rect x="72" y="295" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="237.0" y="319.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">X0 [1024,5120]</text>
+<text x="237.0" y="355.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">1024 个不重复 token</text>
+<text x="587" y="260" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#2563EB">GPU 1</text>
+<rect x="422" y="295" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="587.0" y="319.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">X1 [1024,5120]</text>
+<text x="587.0" y="355.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">1024 个不重复 token</text>
+<text x="412" y="410" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#52627B">GPU 0 / GPU 1 是同一个 TP 组</text>
+<rect x="825" y="160" width="725" height="965" rx="16" fill="#FFFFFF" stroke="#087F79" stroke-width="2"/>
+<text x="1187" y="203" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="30" fill="#087F79">优化：先各算一半，再收齐</text>
+<text x="1012" y="260" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#087F79">GPU 0</text>
+<rect x="847" y="295" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="1012.0" y="319.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">X0 [1024,5120]</text>
+<text x="1012.0" y="355.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">1024 个不重复 token</text>
+<text x="1362" y="260" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="29" fill="#087F79">GPU 1</text>
+<rect x="1197" y="295" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="1362.0" y="319.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">X1 [1024,5120]</text>
+<text x="1362.0" y="355.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">1024 个不重复 token</text>
+<text x="1187" y="410" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#52627B">GPU 0 / GPU 1 是同一个 TP 组</text>
+<rect x="72" y="520" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="237.0" y="544.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">X [2048,5120]</text>
+<text x="237.0" y="580.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">完整 2048 行</text>
+<line x1="237" y1="608" x2="237" y2="665" stroke="#52627B" stroke-width="3"/>
+<polygon points="237,665 243.0,652.0 231.0,652.0" fill="#52627B"/>
+<rect x="72" y="675" width="330" height="110" rx="16" fill="#FFF0CC" stroke="#14243A" stroke-width="2"/>
+<text x="237.0" y="708.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">Norm → Q down</text>
+<text x="237.0" y="757.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">每卡算 2048 行</text>
+<line x1="237" y1="793" x2="237" y2="860" stroke="#52627B" stroke-width="3"/>
+<polygon points="237,860 243.0,847.0 231.0,847.0" fill="#52627B"/>
+<rect x="72" y="870" width="330" height="100" rx="16" fill="#E6F4DC" stroke="#14243A" stroke-width="2"/>
+<text x="237.0" y="900.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">q latent + SWA KV</text>
+<text x="237.0" y="945.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">[2048,1280+512]</text>
+<rect x="847" y="520" width="330" height="110" rx="16" fill="#FFF0CC" stroke="#14243A" stroke-width="2"/>
+<text x="1012.0" y="553.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">Norm → Q down</text>
+<text x="1012.0" y="602.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">每卡只算 1024 行</text>
+<line x1="1012" y1="638" x2="1012" y2="680" stroke="#52627B" stroke-width="3"/>
+<polygon points="1012,680 1018.0,667.0 1006.0,667.0" fill="#52627B"/>
+<rect x="847" y="690" width="330" height="100" rx="16" fill="#E6F4DC" stroke="#14243A" stroke-width="2"/>
+<text x="1012.0" y="720.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">q latent + SWA KV</text>
+<text x="1012.0" y="765.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">[1024,1280+512]</text>
+<rect x="847" y="900" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="1012.0" y="924.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">拼成完整小张量</text>
+<text x="1012.0" y="960.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">[2048,1280+512]</text>
+<rect x="422" y="520" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="587.0" y="544.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">X [2048,5120]</text>
+<text x="587.0" y="580.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">完整 2048 行</text>
+<line x1="587" y1="608" x2="587" y2="665" stroke="#52627B" stroke-width="3"/>
+<polygon points="587,665 593.0,652.0 581.0,652.0" fill="#52627B"/>
+<rect x="422" y="675" width="330" height="110" rx="16" fill="#FFF0CC" stroke="#14243A" stroke-width="2"/>
+<text x="587.0" y="708.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">Norm → Q down</text>
+<text x="587.0" y="757.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">每卡算 2048 行</text>
+<line x1="587" y1="793" x2="587" y2="860" stroke="#52627B" stroke-width="3"/>
+<polygon points="587,860 593.0,847.0 581.0,847.0" fill="#52627B"/>
+<rect x="422" y="870" width="330" height="100" rx="16" fill="#E6F4DC" stroke="#14243A" stroke-width="2"/>
+<text x="587.0" y="900.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">q latent + SWA KV</text>
+<text x="587.0" y="945.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">[2048,1280+512]</text>
+<rect x="1197" y="520" width="330" height="110" rx="16" fill="#FFF0CC" stroke="#14243A" stroke-width="2"/>
+<text x="1362.0" y="553.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">Norm → Q down</text>
+<text x="1362.0" y="602.5" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">每卡只算 1024 行</text>
+<line x1="1362" y1="638" x2="1362" y2="680" stroke="#52627B" stroke-width="3"/>
+<polygon points="1362,680 1368.0,667.0 1356.0,667.0" fill="#52627B"/>
+<rect x="1197" y="690" width="330" height="100" rx="16" fill="#E6F4DC" stroke="#14243A" stroke-width="2"/>
+<text x="1362.0" y="720.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">q latent + SWA KV</text>
+<text x="1362.0" y="765.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">[1024,1280+512]</text>
+<rect x="1197" y="900" width="330" height="80" rx="16" fill="#FFFFFF" stroke="#14243A" stroke-width="2"/>
+<text x="1362.0" y="924.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="27" fill="#14243A">拼成完整小张量</text>
+<text x="1362.0" y="960.0" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="23" fill="#52627B">[2048,1280+512]</text>
+<line x1="237" y1="475" x2="587" y2="475" stroke="#2563EB" stroke-width="3"/>
+<polygon points="587,475 574.0,469.0 574.0,481.0" fill="#2563EB"/>
+<line x1="587" y1="490" x2="237" y2="490" stroke="#2563EB" stroke-width="3"/>
+<polygon points="237,490 250.0,496.0 250.0,484.0" fill="#2563EB"/>
+<text x="412" y="451" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#2563EB">AllGather 5120 维</text>
+<line x1="1012" y1="851" x2="1362" y2="851" stroke="#087F79" stroke-width="3"/>
+<polygon points="1362,851 1349.0,845.0 1349.0,857.0" fill="#087F79"/>
+<line x1="1362" y1="866" x2="1012" y2="866" stroke="#087F79" stroke-width="3"/>
+<polygon points="1012,866 1025.0,872.0 1025.0,860.0" fill="#087F79"/>
+<text x="1187" y="822" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="25" fill="#087F79">AllGather 1792 维</text>
+<line x1="412" y1="985" x2="412" y2="1020" stroke="#52627B" stroke-width="3"/>
+<polygon points="412,1020 418.0,1007.0 406.0,1007.0" fill="#52627B"/>
+<text x="412" y="1060" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#14243A">本卡 Q heads 投影 → Attention</text>
+<line x1="1187" y1="985" x2="1187" y2="1020" stroke="#52627B" stroke-width="3"/>
+<polygon points="1187,1020 1193.0,1007.0 1181.0,1007.0" fill="#52627B"/>
+<text x="1187" y="1060" text-anchor="middle" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="26" fill="#14243A">本卡 Q heads 投影 → Attention</text>
+<text x="50" y="1170" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="28" fill="#14243A">同样是完整 token 行，逐行算子与拼接可交换；Norm 不能放到 SUM 之前。</text>
+<text x="50" y="1220" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#52627B">1792 = Q latent 1280 + 本层 SWA KV 512；这里不包含 global compressor / indexer 的通信。</text>
+<text x="50" y="1265" text-anchor="start" dominant-baseline="central" font-family="Noto Sans CJK SC,sans-serif" font-size="24" fill="#52627B">每卡算术量减少，不保证延迟同比例下降；还要计小 GEMM、通信启动和缓冲开销。</text>
+</svg>
